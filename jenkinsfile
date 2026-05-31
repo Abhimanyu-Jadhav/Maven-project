@@ -3,14 +3,14 @@ pipeline {
 
     triggers {
         githubPush()        // GitHub Webhook Trigger
-        pollSCM('H/5 * * * *') // Poll SCM every 5 minutes
+        pollSCM('H/2 * * * *') // Poll SCM every 5 minutes
     }
 
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/your-org/your-repo.git'
+                    url: 'https://github.com/Abhimanyu-Jadhav/Maven-project.git'
             }
         }
 
