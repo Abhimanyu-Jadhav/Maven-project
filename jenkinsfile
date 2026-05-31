@@ -2,40 +2,18 @@ pipeline {
     agent any
 
     triggers {
-        githubPush()        // GitHub Webhook Trigger
-        pollSCM('H/2 * * * *') // Poll SCM every 5 minutes
+        githubPush()
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                
-                git branch: 'main',
-                    url: 'https://github.com/Abhimanyu-Jadhav/Maven-project.git'
-            }
-        }
-
         stage('Build') {
-            steps {
-                echo 'Building application...'
-                sh 'mvn clean package'
+            when {
+                branch 'main'
             }
-        }
-
-        stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'mvn test'
+                echo 'Code merged/pushed to main branch'
+                // Build commands here
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build Successful'
-        }
-        failure {
-            echo 'Build Failed'
         }
     }
 }
